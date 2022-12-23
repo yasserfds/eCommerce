@@ -34,7 +34,7 @@ function ready() {
     var quantityInputs = document.getElementsByClassName('cart-quantity');
     for (var i = 0; i < quantityInputs.length; i++) {
         var input = quantityInputs[i];
-        input.addEventListener('change', quatityChanged);
+        input.addEventListener('change', quantityChanged);
     };
 
     // Add To Cart
@@ -53,7 +53,7 @@ function removeCartItem(event) {
 };
 
 // Quantity Changes
-function quatityChanged(event) {
+function quantityChanged(event) {
     var input = event.target;
     if(isNaN(input.value) || input.value <= 0) {
         input.value = 1;
@@ -88,19 +88,20 @@ function addProductToCart(title, price, productImg) {
     };
 };
 
-var cartBoxContent = `<img src="/img/product2.jpg" alt="" class="cart-img">
-                    <div class="detail-box">
-                        <div class="cart-product-title">Earbuds</div>
-                        <div class="cart-price">25$</div>
-                        <input type="number" value="1" class="cart-quantity">
-                    </div>
-                    <!-- Remove Cart -->
-                    <i class="bx bxs-trash-alt cart-remove"></i>`
+var cartBoxContent = `
+                        <img src="/img/product2.jpg" alt="" class="cart-img">
+                        <div class="detail-box">
+                            <div class="cart-product-title">Earbuds</div>
+                            <div class="cart-price">25$</div>
+                            <input type="number" value="1" class="cart-quantity">
+                        </div>
+                        <!-- Remove Cart -->
+                        <i class="bx bxs-trash-alt cart-remove"></i>`;
 
 cartShopBox.innerHTML = cartBoxContent;
 cartItems.append(cartShopBox)
 cartShopBox.getElementsByClassName('cart-remove')[0].addEventListener('click', removeCartItem);
-cartShopBox.getElementsByClassName('cart-quantity')[0].addEventListener('change', quatityChanged);
+cartShopBox.getElementsByClassName('cart-quantity')[0].addEventListener('change', quantityChanged);
 
 // Update Total
 function updateTotal() {
@@ -110,7 +111,7 @@ function updateTotal() {
     for (var i = 0; i < cartBoxes.length; i++) {
         var cartBox = cartBoxes[i]
         var priceElement = cartBox.getElementsByClassName('cart-price') [0];
-        var quantityElement = cartBox.getElementsByClassName('cart-quantity') [0];
+        var quantityElement = cartBox.getElementsByClassName('cart-quantity')[0];
         var price = parseFloat(priceElement.innerText.replace("$", ""));
         var quantity = quantityElement.value;
         total = total + (price * quantity);
