@@ -72,20 +72,35 @@ function addCartClicked(event) {
     var title = shopProducts.getElementsByClassName('product-title')[0].innerText;
     var price = shopProducts.getElementsByClassName('price')[0].innerText;
     var productImg = shopProducts.getElementsByClassName('product-img')[0].src;
-    console.log(title, price, productImg);
+    addProductToCart(title, price, productImg);
     updateTotal();
 }
 
 // Add Product To Cart
 function addProductToCart(title, price, productImg) {
     var cartShopBox = document.createElement('div');
-    // cartShopBox.classList.add('cart-box');
+    cartShopBox.classList.add('cart-box');
     var cartItems = document.getElementsByClassName('cart-content')[0];
     var cartItemsNames = cartItems.getElementsByClassName('cart-product-title');
     for (var i = 0; i < cartItemsNames.length; i++) {
         alert("You have already add this item to cart");
+        return;
     };
 };
+
+var cartBoxContent = `<img src="/img/product2.jpg" alt="" class="cart-img">
+                    <div class="detail-box">
+                        <div class="cart-product-title">Earbuds</div>
+                        <div class="cart-price">25$</div>
+                        <input type="number" value="1" class="cart-quantity">
+                    </div>
+                    <!-- Remove Cart -->
+                    <i class="bx bxs-trash-alt cart-remove"></i>`
+
+cartShopBox.innerHTML = cartBoxContent;
+cartItems.append(cartShopBox)
+cartShopBox.getElementsByClassName('cart-remove')[0].addEventListener('click', removeCartItem);
+cartShopBox.getElementsByClassName('cart-quantity')[0].addEventListener('change', quatityChanged);
 
 // Update Total
 function updateTotal() {
